@@ -17,6 +17,10 @@ import java.math.BigDecimal;
  **/
 public class ExchangeRateServices {
 
+
+  BigDecimal unit = new BigDecimal(100);
+
+
   /**
    * 1人民币=16.9109日元
    * @param unitPrice
@@ -26,13 +30,14 @@ public class ExchangeRateServices {
    */
   public BigDecimal exchange(long unitPrice, String from, String to){
     BigDecimal rate =  exchangeRate(from, to);
-    BigDecimal up = new BigDecimal(unitPrice);
-    return up.multiply(rate);
+
+    BigDecimal up = new BigDecimal(unitPrice).divide(unit);
+    return up.multiply(rate).setScale(2,  BigDecimal.ROUND_HALF_UP);
   }
 
   private BigDecimal exchangeRate(String from, String to) {
     if(from.equals("CNY") && to.equals("JPY")){   //1人民币=16.9109日元
-      return new BigDecimal(16.9109);
+      return new BigDecimal(16.9109).setScale(4,  BigDecimal.ROUND_HALF_UP);
     }
     return null;
   }
@@ -47,8 +52,8 @@ public class ExchangeRateServices {
    * @param b
    */
   public int compare(Order a, Order b){
-    BigDecimal ae = exchange(a.unitPrice, a.ccy, b.ccy);
-    BigDecimal be = new BigDecimal(b.unitPrice);
+    BigDecimal ae = exchange(a.unitPrice  , a.ccy, b.ccy);
+    BigDecimal be = new BigDecimal(b.unitPrice).divide(unit);
     return ae.compareTo(be);
   }
 }

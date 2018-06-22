@@ -33,8 +33,8 @@ public class App
         // 获取实时汇率列表
         // 假如：CNY to USA  =
 
-        Order a = new Order(59, "CNY");
-        Order b = new Order(1000, "JPY");
+        Order a = new Order(6000, "CNY");
+        Order b = new Order(100000, "JPY");
 
         ExchangeRateServices services = new ExchangeRateServices();
         int result = services.compare(a, b);

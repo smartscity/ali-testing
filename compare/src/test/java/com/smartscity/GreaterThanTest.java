@@ -9,15 +9,14 @@ import junit.framework.TestSuite;
 /**
  * Unit test for simple App.
  */
-public class AppTest 
-    extends TestCase
+public class GreaterThanTest extends TestCase
 {
     /**
      * Create the test case
      *
      * @param testName name of the test case
      */
-    public AppTest( String testName )
+    public GreaterThanTest(String testName )
     {
         super( testName );
     }
@@ -27,22 +26,20 @@ public class AppTest
      */
     public static Test suite()
     {
-        return new TestSuite( AppTest.class );
+        return new TestSuite( GreaterThanTest.class );
     }
 
     /**
      * Rigourous Test :-)
      */
-    public void testApp()
+    public void  testApp ()
     {
         Order a = new Order(59, "CNY");
         Order b = new Order(1000, "JPY");
-
         ExchangeRateServices services = new ExchangeRateServices();
         int result = services.compare(a, b);
         System.out.println(" 1 大于； 0 等于； -1 小于 ：" + result);
-
-        assertThat();
-        assertTrue( true );
+        assertTrue( result == -1 );
     }
+
 }
